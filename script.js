@@ -14,6 +14,7 @@ const createInputField = () => {
   const textInput = document.createElement('input');
   textInput.setAttribute('type', 'text');
   textInput.setAttribute('name', 'inptext');
+  textInput.className = 'input-text-main';
   inputForm.append(textInput);
   const btnInput = document.createElement('input');
   btnInput.setAttribute('type', 'button');
@@ -26,6 +27,7 @@ createInputField();
 
 const createDeleteButton = () => {
   const deleteBtnInput = document.createElement('input');
+  deleteBtnInput.className = 'del-item-btn';
   deleteBtnInput.setAttribute('type', 'button');
   deleteBtnInput.value = 'Удалить последнюю запись в списке';
   document.forms[0].after(deleteBtnInput);

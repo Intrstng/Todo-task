@@ -1,4 +1,57 @@
+body {
+    background-image: url('https://i.ibb.co/9cqNYdy/1489354.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
+}
+ol {
+    margin: 50px 0 50px 50px;
+}
+li {
+    color:rgba(255, 255, 255, 0.8);
+    font-size: 1.4rem;
+    letter-spacing: 1px;;
+}
 li,
 input[type='text'] {
-    width: 400px;
+    width: 280px;
+}
+form {
+    margin-left: 50px;
+}
+.input-text-main {
+    padding: 8px 15px;
+    border-radius: 8px;
+    border: none;
+    background-color: rgba(253, 240, 224, 0.8);
+    outline: none;
+    margin: 10px 45px 25px 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color:rgba(0, 0, 0, 0.7);
+    letter-spacing: 1px;
+}
+.input-text-main::placeholder {
+    color:rgba(79, 87, 100, 0.7);
+}
+.del-item-btn {
+    margin-left: 50px;
+}
+input[type='button'] {
+    padding: 10px 17px;
+    border-radius: 10px;
+    background-color: rgba(126, 153, 197, 0.7);
+    border: none;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1rem;
+    transition: all 0.25s ease;
+}
+
+input[type='button']:hover {
+    background-color: rgba(107, 142, 35, 0.7);
+    color: rgb(255, 255, 255);
+}
+input[type='button']:active {
+    background-color: rgba(144, 182, 9, 0.7);
+    color: rgb(255, 255, 255);
 }
