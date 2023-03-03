@@ -30,7 +30,7 @@ const createDeleteButton = () => {
   deleteBtnInput.className = 'del-item-btn';
   deleteBtnInput.setAttribute('type', 'button');
   deleteBtnInput.value = 'Удалить последнюю запись в списке';
-  document.forms[0].after(deleteBtnInput);
+  document.forms[0].append(deleteBtnInput);
 }
 createDeleteButton();
 

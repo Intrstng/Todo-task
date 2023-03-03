@@ -30,6 +30,7 @@ li input[type='text'] {
 }
 form {
   margin-left: 50px;
+  width: 500px;
 }
 .input-text-main {
   padding: 8px 15px;
@@ -46,9 +47,9 @@ form {
 .input-text-main::placeholder {
   color:rgba(79, 87, 100, 0.7);
 }
-.del-item-btn {
+/* .del-item-btn {
   margin-left: 50px;
-}
+} */
 input[type='button'] {
   padding: 10px 17px;
   border-radius: 10px;
