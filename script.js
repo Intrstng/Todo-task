@@ -47,7 +47,7 @@ const addItemInOrderedList = () => {
       document.querySelector('ol').append(newOrderedListItem);
       document.forms[0].inptext.value = '';
       document.forms[0].inptext.placeholder = 'Введите значение';
-            newOrderedListItem.addEventListener('click', changeInfoInOrderedListItem, {once: true});
+      newOrderedListItem.addEventListener('click', changeInfoInOrderedListItem, {once: true});
     }
   return;
   } else if (!isClickedAddBtn) {
@@ -100,6 +100,8 @@ function changeInfoInOrderedListItem(event) {
   listItemInput.setAttribute('name', 'litext');
   listItemInput.setAttribute('value', event.target.textContent); //listItemInput.setAttribute('value', this.textContent);
   event.target.innerHTML = `${listItemInput.outerHTML}`; //this.innerHTML = `${listItemInput.outerHTML}`;
+  event.target.firstElementChild.addEventListener('focus', setCaretPositionOnFocus);
+  event.target.firstElementChild.focus();
   event.target.firstElementChild.addEventListener('blur', saveInfoInOrderedListItem);
 }
 
@@ -107,4 +109,8 @@ function saveInfoInOrderedListItem(event) {
   let targetParent = event.target.parentElement;
   event.target.parentElement.textContent = event.target.value;
   targetParent.addEventListener('click', changeInfoInOrderedListItem, {once: true});
+}
+
+function setCaretPositionOnFocus(event) {
+  event.target.selectionStart = event.target.selectionEnd = event.target.value.length;
 }
