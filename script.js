@@ -32,22 +32,10 @@ const createDeleteButton = () => {
 }
 createDeleteButton();
 
+//По видео не до конца ясно: если по условию требуется, что основное текстовое поле может принять ввод значения ДО ТОГО КАК в нем появится placeholder с надписью "Введите значение", тогда испольуем эту первую функцию addItemInOrderedList,
+//Если по условию требуется, что основное текстовое поле может принять ввод значения только ПОСЛЕ ТОГО как в нем появится placeholder с надписью "Введите значение" (т.е. со второго клика по кнопке "Добавить в список записок"), тогда испольуем вторую закоментированную функцию addItemInOrderedList (первую функцию тогда закоментировать вместо)
 let isClickedAddBtn = false;
 const addItemInOrderedList = () => {
-  // if (!isClickedAddBtn) {
-  //   document.forms[0].inptext.placeholder = 'Введите значение';
-  //   isClickedAddBtn = true;
-  //   return;
-  // } else {
-  //   (document.querySelector('ol').children.length === 0) && document.querySelectorAll('input[type="button"]')[1].removeAttribute('disabled');
-  //   if (document.forms[0].inptext.value.length > 0) {
-  //     const newOrderedListItem = document.createElement('li');
-  //     newOrderedListItem.textContent = document.forms[0].inptext.value;
-  //     document.querySelector('ol').append(newOrderedListItem);
-  //     document.forms[0].inptext.value = '';
-  //   }
-  //   return;
-  // }
   if ((!isClickedAddBtn || isClickedAddBtn) && document.forms[0].inptext.value.length > 0) {
     (document.querySelector('ol').children.length === 0 && (document.forms[0].inptext.value.length !== 0)) && document.querySelectorAll('input[type="button"]')[1].removeAttribute('disabled');
     if (document.forms[0].inptext.value.length > 0) {
@@ -57,6 +45,7 @@ const addItemInOrderedList = () => {
       document.querySelector('ol').append(newOrderedListItem);
       document.forms[0].inptext.value = '';
       document.forms[0].inptext.placeholder = 'Введите значение';
+            newOrderedListItem.addEventListener('click', changeInfoInOrderedListItem, {once: true});
     }
   return;
   } else if (!isClickedAddBtn) {
@@ -65,6 +54,23 @@ const addItemInOrderedList = () => {
       return;
     }
 }
+    // const addItemInOrderedList = () => {
+    //   if (!isClickedAddBtn) {
+    //   document.forms[0].inptext.placeholder = 'Введите значение';
+    //   isClickedAddBtn = true;
+    //   return;
+    // } else {
+    //   (document.querySelector('ol').children.length === 0) && document.querySelectorAll('input[type="button"]')[1].removeAttribute('disabled');
+    //   if (document.forms[0].inptext.value.length > 0) {
+    //     const newOrderedListItem = document.createElement('li');
+    //     newOrderedListItem.textContent = document.forms[0].inptext.value;
+    //     document.querySelector('ol').append(newOrderedListItem);
+    //     document.forms[0].inptext.value = '';
+    //     newOrderedListItem.addEventListener('click', changeInfoInOrderedListItem, {once: true});
+    //   }
+    //   return;
+    // }
+    // }
 document.forms[0].inpbtn.addEventListener('click', addItemInOrderedList); 
 
 const removeItemFromOrderedList = () => {
@@ -81,22 +87,22 @@ const removeItemFromOrderedList = () => {
 }
 document.querySelectorAll('input[type="button"]')[1].addEventListener('click', removeItemFromOrderedList);
 
-function saveInfoInOrderedListItem(event) {
-  let newNoteInListItem = event.target.value;
-  console.log(event.target.innerHTML)
-  //event.target.innerHTML = `${listItemInput.outerHTML}`;
+const addHandlersToOrderedListItems = () => {
+  [...document.getElementsByTagName('li')].forEach(item => item.addEventListener('click', changeInfoInOrderedListItem, {once: true}));
 }
+addHandlersToOrderedListItems()
 
 function changeInfoInOrderedListItem(event) {
   const listItemInput = document.createElement('input');
   listItemInput.setAttribute('type', 'text');
   listItemInput.setAttribute('name', 'litext');
-  listItemInput.setAttribute('value', event.target.textContent); //listItemInput.setAttribute('value', this.textContent); 
+  listItemInput.setAttribute('value', event.target.textContent); //listItemInput.setAttribute('value', this.textContent);
   event.target.innerHTML = `${listItemInput.outerHTML}`; //this.innerHTML = `${listItemInput.outerHTML}`;
-  //listItemInput.addEventListener('blur', saveInfoInOrderedListItem);
+  event.target.firstElementChild.addEventListener('blur', saveInfoInOrderedListItem);
 }
 
-const addHandlersToOrderedListItems = () => {
-  [...document.getElementsByTagName('li')].forEach(item => item.addEventListener('click', changeInfoInOrderedListItem));
+function saveInfoInOrderedListItem(event) {
+  let targetParent = event.target.parentElement;
+  event.target.parentElement.textContent = event.target.value;
+  targetParent.addEventListener('click', changeInfoInOrderedListItem, {once: true});
 }
-addHandlersToOrderedListItems()
